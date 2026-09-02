@@ -1,0 +1,117 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240">
+
+    <!-- Outer glow ring -->
+    <path
+        android:pathData="M120,20 A100,100 0 1,1 119.99,20 Z"
+        android:fillColor="#00000000"
+        android:strokeColor="#1ACBE8"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.35" />
+
+    <!-- Mid glow ring -->
+    <path
+        android:pathData="M120,35 A85,85 0 1,1 119.99,35 Z"
+        android:fillColor="#00000000"
+        android:strokeColor="#1ACBE8"
+        android:strokeWidth="1"
+        android:strokeAlpha="0.25" />
+
+    <!-- Human head silhouette (left-facing profile) -->
+    <path
+        android:pathData="M90,185 C72,183 60,170 58,155 C56,140 62,128 70,120 C68,112 66,100 70,88 C76,68 90,54 108,48 C122,43 138,45 150,54 C162,63 168,78 166,94 C172,102 174,116 170,128 C166,140 156,148 146,152 C144,162 140,172 132,178 C124,184 108,187 90,185 Z"
+        android:fillColor="#0D2233"
+        android:strokeColor="#1ACBE8"
+        android:strokeWidth="1.8" />
+
+    <!-- Brain top-left lobe -->
+    <path
+        android:pathData="M86,72 C78,74 72,82 74,92 C76,100 84,104 92,100 C90,110 94,118 102,120 C100,112 100,102 106,96 C102,88 92,82 86,72 Z"
+        android:fillColor="#0A3A4A"
+        android:strokeColor="#1ACBE8"
+        android:strokeWidth="1.2" />
+
+    <!-- Brain top-right lobe -->
+    <path
+        android:pathData="M154,72 C162,74 168,82 166,92 C164,100 156,104 148,100 C150,110 146,118 138,120 C140,112 140,102 134,96 C138,88 148,82 154,72 Z"
+        android:fillColor="#0A3A4A"
+        android:strokeColor="#1ACBE8"
+        android:strokeWidth="1.2" />
+
+    <!-- Brain center mass -->
+    <path
+        android:pathData="M106,96 C102,104 100,114 104,122 C108,130 116,134 120,134 C124,134 132,130 136,122 C140,114 138,104 134,96 C130,90 126,88 120,88 C114,88 110,90 106,96 Z"
+        android:fillColor="#0A3A4A"
+        android:strokeColor="#1ACBE8"
+        android:strokeWidth="1.2" />
+
+    <!-- Neural lines left -->
+    <path
+        android:pathData="M86,96 L100,104 M80,108 L98,112 M84,120 L102,118"
+        android:fillColor="#00000000"
+        android:strokeColor="#1ACBE8"
+        android:strokeWidth="0.8"
+        android:strokeAlpha="0.6" />
+
+    <!-- Neural lines right -->
+    <path
+        android:pathData="M154,96 L140,104 M160,108 L142,112 M156,120 L138,118"
+        android:fillColor="#00000000"
+        android:strokeColor="#1ACBE8"
+        android:strokeWidth="0.8"
+        android:strokeAlpha="0.6" />
+
+    <!-- Neural dots left side -->
+    <path android:pathData="M82,88 A2,2 0,1 1,81.99 88" android:fillColor="#1ACBE8" android:fillAlpha="0.7"/>
+    <path android:pathData="M76,104.5 A1.5,1.5 0,1 1,75.99 104.5" android:fillColor="#1ACBE8" android:fillAlpha="0.5"/>
+    <path android:pathData="M80,120 A2,2 0,1 1,79.99 120" android:fillColor="#1ACBE8" android:fillAlpha="0.6"/>
+
+    <!-- Neural dots right side -->
+    <path android:pathData="M158,88 A2,2 0,1 1,157.99 88" android:fillColor="#1ACBE8" android:fillAlpha="0.7"/>
+    <path android:pathData="M164,104.5 A1.5,1.5 0,1 1,163.99 104.5" android:fillColor="#1ACBE8" android:fillAlpha="0.5"/>
+    <path android:pathData="M160,120 A2,2 0,1 1,159.99 120" android:fillColor="#1ACBE8" android:fillAlpha="0.6"/>
+
+    <!-- Central brain glow nodes -->
+    <path android:pathData="M110,99.5 A2.5,2.5 0,1 1,109.99 99.5" android:fillColor="#4AE8FF"/>
+    <path android:pathData="M120,93 A3,3 0,1 1,119.99 93" android:fillColor="#4AE8FF"/>
+    <path android:pathData="M130,99.5 A2.5,2.5 0,1 1,129.99 99.5" android:fillColor="#4AE8FF"/>
+    <path android:pathData="M115,114 A2,2 0,1 1,114.99 114" android:fillColor="#4AE8FF" android:fillAlpha="0.8"/>
+    <path android:pathData="M125,114 A2,2 0,1 1,124.99 114" android:fillColor="#4AE8FF" android:fillAlpha="0.8"/>
+
+    <!-- Connection network lines between nodes -->
+    <path
+        android:pathData="M110,102 L120,96 L130,102 M120,96 L120,88 M110,102 L115,116 M130,102 L125,116 M115,116 L125,116"
+        android:fillColor="#00000000"
+        android:strokeColor="#4AE8FF"
+        android:strokeWidth="0.9"
+        android:strokeAlpha="0.7"/>
+
+    <!-- Lightning bolt left -->
+    <path
+        android:pathData="M58,90 L50,110 L60,108 L52,132"
+        android:fillColor="#00000000"
+        android:strokeColor="#A0EEFF"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.6"/>
+
+    <!-- Lightning bolt right -->
+    <path
+        android:pathData="M182,80 L195,105 L183,103 L196,128"
+        android:fillColor="#00000000"
+        android:strokeColor="#A0EEFF"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.6"/>
+
+    <!-- Neck connection line to shoulders -->
+    <path
+        android:pathData="M104,155 L104,175 C104,182 112,186 120,186 C128,186 136,182 136,175 L136,155"
+        android:fillColor="#0D2233"
+        android:strokeColor="#1ACBE8"
+        android:strokeWidth="1.2"
+        android:strokeAlpha="0.5"/>
+
+</vector>
+

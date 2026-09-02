@@ -1,0 +1,3 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="r2h.permission.BIND_ENGINE" />
+</manifest>

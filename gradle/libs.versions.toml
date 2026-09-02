@@ -1,0 +1,43 @@
+[versions]
+agp                      = "9.2.1"
+kotlin                   = "2.2.21"
+coreKtx                  = "1.19.0"
+appcompat                = "1.7.1"
+lifecycleRuntimeKtx      = "2.10.0"
+lifecycleService         = "2.10.0"
+lifecycleViewmodelKtx    = "2.8.7"
+coroutines               = "1.11.0"
+junit4                   = "4.13.2"
+androidxTestExtJunit     = "1.3.0"
+androidxTestEspresso     = "3.7.0"
+mockk                    = "1.14.11"
+
+[libraries]
+# AndroidX core
+androidx-core-ktx              = { group = "androidx.core",              name = "core-ktx",              version.ref = "coreKtx" }
+androidx-appcompat             = { group = "androidx.appcompat",         name = "appcompat",             version.ref = "appcompat" }
+
+# Lifecycle
+lifecycle-runtime-ktx          = { group = "androidx.lifecycle",         name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+lifecycle-service              = { group = "androidx.lifecycle",         name = "lifecycle-service",     version.ref = "lifecycleService" }
+lifecycle-viewmodel-ktx        = { group = "androidx.lifecycle",         name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+
+# Coroutines
+kotlinx-coroutines-core        = { group = "org.jetbrains.kotlinx",      name = "kotlinx-coroutines-core",    version.ref = "coroutines" }
+kotlinx-coroutines-android     = { group = "org.jetbrains.kotlinx",      name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+
+# Test — unit (JVM)
+junit4                         = { group = "junit",                      name = "junit",                 version.ref = "junit4" }
+mockk                          = { group = "io.mockk",                   name = "mockk",                 version.ref = "mockk" }
+kotlinx-coroutines-test        = { group = "org.jetbrains.kotlinx",      name = "kotlinx-coroutines-test", version.ref = "coroutines" }
+
+# Test — instrumented (device)
+androidx-test-ext-junit        = { group = "androidx.test.ext",          name = "junit",                 version.ref = "androidxTestExtJunit" }
+androidx-test-espresso-core    = { group = "androidx.test.espresso",     name = "espresso-core",         version.ref = "androidxTestEspresso" }
+mockk-android                  = { group = "io.mockk",                   name = "mockk-android",         version.ref = "mockk" }
+
+[plugins]
+android-application  = { id = "com.android.application",                   version.ref = "agp" }
+android-library      = { id = "com.android.library",                       version.ref = "agp" }
+kotlin-android       = { id = "org.jetbrains.kotlin.android",              version.ref = "kotlin" }
+kotlin-parcelize     = { id = "org.jetbrains.kotlin.plugin.parcelize",     version.ref = "kotlin" }

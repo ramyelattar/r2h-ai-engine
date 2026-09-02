@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">R2H AI Engine</string>
+
+    <!-- Notification channel -->
+    <string name="notification_channel_name">Engine Service</string>
+    <string name="notification_channel_description">Persistent notification while the AI inference engine is running</string>
+
+    <!-- Foreground notification -->
+    <string name="notification_title">R2H AI Engine</string>
+    <string name="notification_text_idle">Engine is running and ready</string>
+    <string name="notification_text_generating">Generating…</string>
+
+    <!-- Status UI -->
+    <string name="status_disconnected">Not connected to engine service</string>
+    <string name="status_error">Error reading engine status</string>
+    <string name="status_no_model">none</string>
+    <!-- %1$d = API version, %2$s = state name, %3$s = loaded model ID -->
+    <string name="status_connected_format">API v%1$d · %2$s · Model: %3$s</string>
+    <string name="dashboard_runtime_unavailable">Runtime unavailable until a validated local model and runtime are registered.</string>
+    <string name="notification_listener_service_label">R2H Local Notification Summary</string>
+    <string name="accessibility_service_label">R2H Approved Automation</string>
+    <string name="accessibility_service_description">Disabled-by-default local automation scaffold. R2H only performs approved visible actions and logs every action.</string>
+</resources>

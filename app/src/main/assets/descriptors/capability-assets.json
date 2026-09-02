@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 2,
+  "sourceOfTruth": "app/src/main/assets/model-pack/model-pack-manifest.json",
+  "readinessWarning": "Asset presence is not readiness. A capability also requires descriptor registration, local runtime wiring, Android input pipeline, real runtime output, and installed-device proof.",
+  "baseAssetPath": "app/src/main/assets/model-pack",
+  "capabilities": [
+    {
+      "capability": "IMAGE",
+      "modelAssetPresent": true,
+      "runtimeConnected": false,
+      "inputPipelinePresent": false,
+      "apiConnected": true,
+      "outputProduced": false,
+      "installedProof": false,
+      "blocker": "MISSING_LLAMA_CPP_MTMD_ANDROID_JNI_WIRING",
+      "requiredArtifacts": [
+        {
+          "path": "models/qwen2vl/Qwen2-VL-2B-Instruct-Q4_K_M.gguf",
+          "minBytes": 986046944,
+          "sha256": "5745685D2E607A82A0696C1118E56A2A1AE0901DA450FD9CD4F161C6B62867D7"
+        },
+        {
+          "path": "models/qwen2vl/mmproj-Qwen2-VL-2B-Instruct-Q8_0.gguf",
+          "minBytes": 709883360,
+          "sha256": "A0AD91F00A7A80DCF84D719A61B00EE2E07B71794F4EE2DFA81A254621A8C418"
+        }
+      ],
+      "requiredTestInputs": [
+        "app/src/main/assets/test-inputs/image-proof.jpg"
+      ]
+    },
+    {
+      "capability": "MULTIMODAL",
+      "modelAssetPresent": true,
+      "runtimeConnected": false,
+      "inputPipelinePresent": false,
+      "apiConnected": true,
+      "outputProduced": false,
+      "installedProof": false,
+      "blocker": "MISSING_LLAMA_CPP_MTMD_ANDROID_JNI_WIRING",
+      "requiredArtifacts": [
+        {
+          "path": "models/qwen2vl/Qwen2-VL-2B-Instruct-Q4_K_M.gguf",
+          "minBytes": 986046944,
+          "sha256": "5745685D2E607A82A0696C1118E56A2A1AE0901DA450FD9CD4F161C6B62867D7"
+        },
+        {
+          "path": "models/qwen2vl/mmproj-Qwen2-VL-2B-Instruct-Q8_0.gguf",
+          "minBytes": 709883360,
+          "sha256": "A0AD91F00A7A80DCF84D719A61B00EE2E07B71794F4EE2DFA81A254621A8C418"
+        }
+      ],
+      "requiredTestInputs": [
+        "app/src/main/assets/test-inputs/image-proof.jpg"
+      ]
+    },
+    {
+      "capability": "YOLO_IMAGE_DETECTION",
+      "modelAssetPresent": true,
+      "runtimeConnected": false,
+      "inputPipelinePresent": false,
+      "apiConnected": false,
+      "outputProduced": false,
+      "installedProof": false,
+      "blocker": "MISSING_YOLO_PREPROCESS_OUTPUT_PARSER_NMS_SERVICE_WIRING",
+      "requiredArtifacts": [
+        {
+          "path": "models/detection/yolo11n.onnx",
+          "minBytes": 10741391,
+          "sha256": "4E6D7D6AE7E8BF2CDA68915D5014358F05D3219526572E344D33BD2BE71179D9"
+        },
+        {
+          "path": "models/detection/yolo11n_ncnn/model.ncnn.bin",
+          "minBytes": 10566144,
+          "sha256": "102F84D2C53440E91B3424857FCB42A1F626E0C9530600D80ACCDED90B5EF465"
+        },
+        {
+          "path": "models/detection/yolo11n_ncnn/model.ncnn.param",
+          "minBytes": 22713,
+          "sha256": "9F568298132B90D2B180CD3B4010D5B9574BEE8C631B02B93256194953C074B7"
+        },
+        {
+          "path": "models/detection/yolo11n_ncnn/metadata.yaml",
+          "minBytes": 1578,
+          "sha256": "07310E64890A31D7E9F665752C1ECF601C9E561ED68C53223D57C76A20709355"
+        }
+      ],
+      "requiredTestInputs": [
+        "app/src/main/assets/test-inputs/image-proof.jpg"
+      ]
+    },
+    {
+      "capability": "OCR",
+      "modelAssetPresent": false,
+      "runtimeConnected": false,
+      "inputPipelinePresent": false,
+      "apiConnected": true,
+      "outputProduced": false,
+      "installedProof": false,
+      "blocker": "MISSING_LOCAL_OCR_RUNTIME_OR_READY_MULTIMODAL_VISION_PATH",
+      "requiredArtifacts": [],
+      "requiredTestInputs": [
+        "app/src/main/assets/test-inputs/ocr-proof.png"
+      ]
+    },
+    {
+      "capability": "STT",
+      "modelAssetPresent": true,
+      "runtimeConnected": false,
+      "inputPipelinePresent": false,
+      "apiConnected": true,
+      "outputProduced": false,
+      "installedProof": false,
+      "blocker": "MISSING_CTRANSLATE2_ANDROID_RUNTIME",
+      "requiredArtifacts": [
+        {
+          "path": "models/stt/faster-whisper-tiny/model.bin",
+          "minBytes": 75538270,
+          "sha256": "DCB76C6586FC06CBDAC6DD21F14CFD129CC4CDD9DCE19BF4FFA62E59CBE6E6D1"
+        },
+        {
+          "path": "models/stt/faster-whisper-tiny/config.json",
+          "minBytes": 2249,
+          "sha256": "A73A28CDFE1C43CCC7202FA333D1F89C202477271407AE9A7F19AFA52039CAC8"
+        },
+        {
+          "path": "models/stt/faster-whisper-tiny/tokenizer.json",
+          "minBytes": 2203239,
+          "sha256": "FB7B63191E9BB045082C79FD742A3106A12C99513AB30DF4A0D47FA6CB6FD0AB"
+        },
+        {
+          "path": "models/stt/faster-whisper-tiny/vocabulary.txt",
+          "minBytes": 459861,
+          "sha256": "34CE3FE1C5041027B3F8D42912270993F986DBC4BB34CF27F951E34A1E453913"
+        }
+      ],
+      "requiredTestInputs": [
+        "app/src/main/assets/test-inputs/stt-proof.wav"
+      ]
+    },
+    {
+      "capability": "TTS",
+      "modelAssetPresent": true,
+      "runtimeConnected": false,
+      "inputPipelinePresent": false,
+      "apiConnected": true,
+      "outputProduced": false,
+      "installedProof": false,
+      "blocker": "MISSING_PIPER_OR_ONNXRUNTIME_ANDROID_AUDIO_PIPELINE",
+      "requiredArtifacts": [
+        {
+          "path": "models/tts/piper/voices/ar_JO-kareem-medium.onnx",
+          "minBytes": 63201294,
+          "sha256": "9E95CAB07B679DA603BBA17C4DEC7AB3111320571964EE95C0379603C086491E"
+        },
+        {
+          "path": "models/tts/piper/voices/ar_JO-kareem-medium.onnx.json",
+          "minBytes": 5024,
+          "sha256": "EA6D9B9D9076DBDB6BF5C98C6A141EF154959D2359709B37855727964E7D6C4D"
+        },
+        {
+          "path": "models/tts/piper/voices/en_US-lessac-high.onnx",
+          "minBytes": 113895201,
+          "sha256": "4CABF7C3A638017137F34A1516522032D4FE3F38228A843CC9B764DDCBCD9E09"
+        },
+        {
+          "path": "models/tts/piper/voices/en_US-lessac-high.onnx.json",
+          "minBytes": 4883,
+          "sha256": "DB42B97D9859F257BC1561B8ED980E7FB2398402050A74DDD6CBEC931A92412F"
+        }
+      ],
+      "requiredTestInputs": []
+    },
+    {
+      "capability": "AUDIO",
+      "modelAssetPresent": false,
+      "runtimeConnected": false,
+      "inputPipelinePresent": false,
+      "apiConnected": true,
+      "outputProduced": false,
+      "installedProof": false,
+      "blocker": "MISSING_GENERAL_AUDIO_RUNTIME",
+      "requiredArtifacts": [],
+      "requiredTestInputs": [
+        "app/src/main/assets/test-inputs/audio-proof.wav"
+      ]
+    },
+    {
+      "capability": "VIDEO",
+      "modelAssetPresent": "PARTIAL",
+      "runtimeConnected": false,
+      "inputPipelinePresent": false,
+      "apiConnected": true,
+      "outputProduced": false,
+      "installedProof": false,
+      "blocker": "BLOCKED_BY_MULTIMODAL_RUNTIME",
+      "requiredArtifacts": [
+        {
+          "path": "models/qwen2vl/Qwen2-VL-2B-Instruct-Q4_K_M.gguf",
+          "minBytes": 986046944,
+          "sha256": "5745685D2E607A82A0696C1118E56A2A1AE0901DA450FD9CD4F161C6B62867D7"
+        },
+        {
+          "path": "models/qwen2vl/mmproj-Qwen2-VL-2B-Instruct-Q8_0.gguf",
+          "minBytes": 709883360,
+          "sha256": "A0AD91F00A7A80DCF84D719A61B00EE2E07B71794F4EE2DFA81A254621A8C418"
+        }
+      ],
+      "requiredTestInputs": [
+        "app/src/main/assets/test-inputs/video-proof.mp4"
+      ]
+    },
+    {
+      "capability": "EMBEDDINGS",
+      "modelAssetPresent": false,
+      "rerankerAssetPresent": true,
+      "runtimeConnected": false,
+      "inputPipelinePresent": false,
+      "apiConnected": true,
+      "outputProduced": false,
+      "installedProof": false,
+      "blocker": "RERANKER_IS_NOT_CONFIRMED_EMBEDDING_MODEL",
+      "requiredArtifacts": [
+        {
+          "path": "models/reranker/model.onnx",
+          "minBytes": 1112459588,
+          "sha256": "15B9A8C3DA82EDDF263DF571281166E00E9308FE19D077084B642EBFCAF06D2B"
+        },
+        {
+          "path": "models/reranker/config.json",
+          "minBytes": 799,
+          "sha256": "289ADF7ADA1EB6B4AFA7589A48A032D45A076CF2E46DCDB3B4CABC33BE14F708"
+        },
+        {
+          "path": "models/reranker/tokenizer.json",
+          "minBytes": 17098107,
+          "sha256": "9EB652AC4E40CC093272BBBE0F55D521CF67570060227109B5CDC20945A4489E"
+        },
+        {
+          "path": "models/reranker/tokenizer_config.json",
+          "minBytes": 443,
+          "sha256": "A1D6BC8734A6F635DC158508BEF000F8E2E5A759C7D92F984B2C86E5FF53425B"
+        },
+        {
+          "path": "models/reranker/sentencepiece.bpe.model",
+          "minBytes": 5069051,
+          "sha256": "CFC8146ABE2A0488E9E2A0C56DE7952F7C11AB059ECA145A0A727AFCE0DB2865"
+        },
+        {
+          "path": "models/reranker/special_tokens_map.json",
+          "minBytes": 279,
+          "sha256": "D5469A60DB23249C7F8945013D78DF30B44B6BF686C6BB4740F4223F77B1B535"
+        }
+      ],
+      "requiredTestInputs": []
+    },
+    {
+      "capability": "TOOLS_AGENTS",
+      "modelAssetPresent": true,
+      "runtimeConnected": true,
+      "inputPipelinePresent": true,
+      "apiConnected": true,
+      "outputProduced": false,
+      "installedProof": false,
+      "blocker": "INSTALLED_PROOF_MISSING",
+      "requiredArtifacts": [
+        {
+          "path": "models/qwen2vl/Qwen2-VL-2B-Instruct-Q4_K_M.gguf",
+          "minBytes": 986046944,
+          "sha256": "5745685D2E607A82A0696C1118E56A2A1AE0901DA450FD9CD4F161C6B62867D7"
+        }
+      ],
+      "requiredTestInputs": []
+    }
+  ]
+}

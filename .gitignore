@@ -1,0 +1,84 @@
+# Build outputs
+build/
+**/build/
+*.class
+*.jar
+*.aar
+
+# Gradle
+.gradle/
+local.properties
+gradle.properties.local
+
+# Android
+*.apk
+*.ap_
+*.aab
+*.dex
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# NDK
+*.so
+*.o
+*.a
+*.ko
+
+# Required vendored arm64 runtime inputs. Keep these exceptions narrow so a
+# fresh checkout can reproduce the native package without tracking build output.
+!third_party/runtimes/ncnn/extracted/ncnn-20260526-android-shared/arm64-v8a/lib/libncnn.so
+!third_party/runtimes/sherpa-onnx-prebuilt-android/extracted/sherpa-onnx-v1.13.3-android/jniLibs/arm64-v8a/libonnxruntime.so
+!third_party/runtimes/sherpa-onnx-prebuilt-android/extracted/sherpa-onnx-v1.13.3-android/jniLibs/arm64-v8a/libsherpa-onnx-c-api.so
+!third_party/runtimes/sherpa-onnx-prebuilt-android/extracted/sherpa-onnx-v1.13.3-android/jniLibs/arm64-v8a/libsherpa-onnx-cxx-api.so
+!third_party/runtimes/sherpa-onnx-prebuilt-android/extracted/sherpa-onnx-v1.13.3-android/jniLibs/arm64-v8a/libsherpa-onnx-jni.so
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# GGUF model files — too large for git
+*.gguf
+*.bin
+*.ggml
+# Release signing material and local secrets
+Secure/Signing/
+*.jks
+*.keystore
+release-signing.properties
+keystore.properties
+
+# Local tooling / generated data
+.codegraph/
+.gradle-user-home/
+.kotlin/
+audit-output/
+node_modules/
+_portfolio_scan.md
+
+# Crash / replay logs
+hs_err_pid*.log
+replay_pid*.log
+
+# Local downloaded Android runtime bundle
+llama-b9616-bin-android-arm64/
+
+# Excluded from repository
+BUILDING.md
+docs/
+third_party/
+tools/
+
+# Large local model files
+app/src/main/assets/model-pack/models/reranker/model.onnx
+app/src/main/assets/model-pack/models/tts/piper/voices/en_US-lessac-high.onnx

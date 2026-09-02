@@ -1,0 +1,188 @@
+package io.r2h.engine.core
+
+import android.util.Log
+import io.r2h.engine.nativebridge.NativeErrorCode
+import io.r2h.engine.nativebridge.NativeFinishCode
+import io.r2h.engine.nativebridge.NativeInferenceEngine
+import io.r2h.engine.nativebridge.TokenCallback
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+
+private const val TAG = "LiteRtBackend"
+private const val DEFAULT_MAX_CONTEXT = 2048
+private const val DEFAULT_THREADS = 4
+
+/**
+ * AiModelBackend adapter that delegates to [NativeInferenceEngine] (LiteRT-LM runtime).
+ *
+ * This adapter encapsulates the opaque context handle, lifecycle phases, and result
+ * translation so that [InferenceOrchestrator] depends only on [AiModelBackend], not on
+ * the concrete LiteRT types.
+ *
+ * Creating an additional backend (image models, NNAPI, etc.) only requires a new class
+ * implementing [AiModelBackend] — the orchestrator code does not need to change.
+ */
+internal class LiteRtBackend(
+    private val maxContextLength: Int = DEFAULT_MAX_CONTEXT,
+    private val threads: Int = DEFAULT_THREADS,
+) : AiModelBackend {
+
+    @Volatile private var contextHandle: Long = 0L
+    @Volatile private var loadedModelId: String? = null
+    @Volatile private var lastError: String? = null
+
+    // ─── AiModelBackend ───────────────────────────────────────────────────────
+
+    override fun getLabel(): String {
+        val label = if (contextHandle != 0L) {
+            NativeInferenceEngine.getBackendLabel(contextHandle) ?: "LiteRT"
+        } else {
+            "LiteRT"
+        }
+        return "LiteRT/$label"
+    }
+
+    override fun getModelType(): String = "TEXT_GENERATION"
+
+    override suspend fun load(modelPath: String, phase: (String) -> Unit): Boolean {
+        return withContext(Dispatchers.IO) {
+            lastError = null
+
+            phase("Validating file")
+            val modelFile = java.io.File(modelPath)
+            if (!modelFile.exists()) {
+                lastError = "Model file not found: $modelPath"
+                Log.e(TAG, lastError!!)
+                return@withContext false
+            }
+            if (!modelFile.extension.equals("litertlm", ignoreCase = true)) {
+                lastError = "Unsupported model format: ${modelFile.extension}"
+                Log.e(TAG, lastError!!)
+                return@withContext false
+            }
+
+            phase("Reading model metadata")
+            val modelId = modelFile.nameWithoutExtension
+
+            phase("Initializing LiteRT runtime")
+            val handle = NativeInferenceEngine.createContext(
+                modelPath = modelFile.absolutePath,
+                mmprojPath = null,
+                maxContextLength = maxContextLength,
+                threads = threads,
+            )
+
+            if (handle == 0L) {
+                lastError = "LiteRT createContext returned 0 for ${modelFile.name}"
+                Log.e(TAG, lastError!!)
+                return@withContext false
+            }
+
+            phase("Allocating inference buffers")
+            contextHandle = handle
+            loadedModelId = modelId
+
+            phase("Ready")
+            Log.i(TAG, "Model loaded: ${modelFile.name} handle=0x${handle.toString(16)} backend=${getLabel()}")
+            true
+        }
+    }
+
+    override suspend fun generate(
+        prompt: String,
+        maxTokens: Int,
+        temperature: Float,
+        systemPrompt: String?,
+        onToken: ((String) -> Unit)?,
+    ): BackendGenerateResult {
+        val handle = contextHandle
+        if (handle == 0L) {
+            return BackendGenerateResult(
+                isSuccess = false, isCancelled = false, isInvalidHandle = true,
+                isOom = false, isMaxTokens = false,
+                promptTokenCount = -1, generatedTokenCount = 0,
+                errorMessage = "No model loaded",
+            )
+        }
+
+        val nativeResult = NativeInferenceEngine.generate(
+            contextHandle = handle,
+            prompt = prompt,
+            maxTokens = maxTokens,
+            temperature = temperature,
+            systemPrompt = systemPrompt,
+            tokenCallback = TokenCallback { token -> onToken?.invoke(token) },
+        )
+
+        return when (nativeResult.errorCode) {
+            NativeErrorCode.SUCCESS, NativeErrorCode.CANCELLED -> BackendGenerateResult(
+                isSuccess = nativeResult.errorCode == NativeErrorCode.SUCCESS,
+                isCancelled = nativeResult.errorCode == NativeErrorCode.CANCELLED,
+                isInvalidHandle = false,
+                isOom = false,
+                isMaxTokens = nativeResult.finishReasonCode == NativeFinishCode.MAX_TOKENS,
+                promptTokenCount = nativeResult.promptTokenCount,
+                generatedTokenCount = nativeResult.generatedTokenCount,
+            )
+            NativeErrorCode.INVALID_HANDLE -> BackendGenerateResult(
+                isSuccess = false, isCancelled = false, isInvalidHandle = true,
+                isOom = false, isMaxTokens = false,
+                promptTokenCount = -1, generatedTokenCount = 0,
+                errorMessage = "Invalid context handle",
+            )
+            NativeErrorCode.OOM -> BackendGenerateResult(
+                isSuccess = false, isCancelled = false, isInvalidHandle = false,
+                isOom = true, isMaxTokens = false,
+                promptTokenCount = nativeResult.promptTokenCount, generatedTokenCount = 0,
+                errorMessage = "Out of memory",
+            )
+            else -> BackendGenerateResult(
+                isSuccess = false, isCancelled = false, isInvalidHandle = false,
+                isOom = false, isMaxTokens = false,
+                promptTokenCount = nativeResult.promptTokenCount,
+                generatedTokenCount = nativeResult.generatedTokenCount,
+                errorMessage = "Native error code: ${nativeResult.errorCode}",
+            )
+        }
+    }
+
+    override fun cancel() {
+        val handle = contextHandle
+        if (handle != 0L) {
+            NativeInferenceEngine.cancel(handle)
+        }
+    }
+
+    override suspend fun unload() {
+        val handle = contextHandle
+        if (handle != 0L) {
+            NativeInferenceEngine.destroyContext(handle)
+            contextHandle = 0L
+            loadedModelId = null
+            Log.i(TAG, "Model unloaded handle=0x${handle.toString(16)}")
+        }
+    }
+
+    override fun getIsLoaded(): Boolean = contextHandle != 0L
+
+    override fun getMetadata(): Map<String, String> {
+        val handle = contextHandle
+        val backendLabel = if (handle != 0L) {
+            NativeInferenceEngine.getBackendLabel(handle) ?: "Unknown"
+        } else {
+            "None"
+        }
+        return buildMap {
+            put("executionTarget", backendLabel)
+            put("runtime", "LiteRT-LM")
+            put("modelType", getModelType())
+            put("maxContextLength", maxContextLength.toString())
+            put("threads", threads.toString())
+        }
+    }
+
+    override fun getLastError(): String? = lastError
+
+    override fun getLoadedModelId(): String? = loadedModelId
+}
+

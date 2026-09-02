@@ -1,0 +1,4 @@
+# Template for machine-local SDK configuration. Copy to 'local.properties' and adjust.
+# NEVER commit local.properties. Release-signing credentials belong only in
+# <GRADLE_USER_HOME>/gradle.properties; see BUILDING.md.
+sdk.dir=C:/path/to/Android/Sdk

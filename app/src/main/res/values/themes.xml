@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.R2HEngine" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#8B1018</item>
+        <item name="colorPrimaryDark">#050506</item>
+        <item name="colorAccent">#FF3B45</item>
+        <item name="android:windowBackground">#050506</item>
+        <item name="android:statusBarColor">#050506</item>
+        <item name="android:navigationBarColor">#050506</item>
+    </style>
+
+    <style name="Theme.R2HEngine.Splash" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">#050506</item>
+        <item name="android:statusBarColor">#050506</item>
+        <item name="android:navigationBarColor">#050506</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+</resources>

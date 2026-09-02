@@ -1,0 +1,3 @@
+[submodule "engine-native/src/main/cpp/llama.cpp"]
+	path = engine-native/src/main/cpp/llama.cpp
+	url = https://github.com/ggerganov/llama.cpp
